@@ -82,8 +82,9 @@ if __name__ == '__main__':
 	#Determine the y values using the line formula we found with m and b
 	y_space = (m_opt * X_space + b_opt)
 	#Reshape to appropriate for plat generation
-	X_space.reshape(-1, 1)
-	y_space.reshape(-1, 1)
+	X_space = X_space.reshape(-1,1)
+	y_space = y_space.reshape(-1,1)
+
 
 	"*** END YOUR CODE HERE ***"
 
@@ -140,9 +141,8 @@ if __name__ == '__main__':
 	X_space_stacked = X_space	# need to be replaced following hint 1 and 2
 	W_opt = None
 	"*** YOUR CODE HERE ***"
-	X_space_stacked = np.hstack((np.ones_like(y_space), X_space))
+	X_space_stacked = np.hstack((np.ones_like(y_space),X_space))
 	W_opt = np.linalg.solve(X_space_stacked.T @ X_space_stacked, X_space_stacked.T @ y_space_rand)
-
 	"*** END YOUR CODE HERE ***"
 
 	# get the new m, and new b from W_opt obtained above
@@ -159,8 +159,7 @@ if __name__ == '__main__':
 	y_pred_rand = []
 	"*** YOUR CODE HERE ***"
 
-	y_pred_rand = np.array([b_rand_opt + m_rand_opt * x for x in X_space])
-	y_pred_rand.reshape(-1, 1)
+	y_pred_rand =np.array([b_rand_opt + m_rand_opt * x  for x in X_space]).reshape(-1,1)
 
 	"*** END YOUR CODE HERE ***"
 
