@@ -55,12 +55,6 @@ if __name__ == '__main__':
 	plt.style.use('ggplot')
 	plt.plot(X, y, 'ro')
 
-	xaxis = np.linspace(-1, 5, num=100).reshape(-1, 1)
-	yaxis = (m_opt * xaxis + b_opt).reshape(-1, 1)
-	plt.plot(xaxis, yaxis)
-	plt.savefig('hw1.png')
-	plt.close()
-
 
 	# TODO: replace the m_opt and b_opt with the solution you obtained from
 	# 		part (a), note that y = mx + b
@@ -68,7 +62,6 @@ if __name__ == '__main__':
 	m_opt = 62/35
 	b_opt = 18/35
 	"*** END YOUR CODE HERE ***"
-
 
 
 	# TODO: generate 100 points along the line of optimal linear fit.
@@ -84,6 +77,13 @@ if __name__ == '__main__':
 	y_space = []
 	"*** YOUR CODE HERE ***"
 
+	#Create the x values
+	X_space = np.linspace(-1, 5, num=100)
+	#Determine the y values using the line formula we found with m and b
+	y_space = (m_opt * X_space + b_opt)
+	#Reshape to appropriate for plat generation
+	X_space.reshape(-1, 1)
+	y_space.reshape(-1, 1)
 
 	"*** END YOUR CODE HERE ***"
 
@@ -101,12 +101,14 @@ if __name__ == '__main__':
 	# variables to start with
 	mu, sigma, sampleSize = 0, 1, 100
 
+
 	# TODO: Generate white Gaussian noise
 	# HINT: Use np.random.normal to generate noise
 
 	noise = []
 	"*** YOUR CODE HERE ***"
 
+	noise = np.random.normal(mu, sigma, sampleSize)
 
 	"*** END YOUR CODE HERE ***"
 
@@ -118,6 +120,8 @@ if __name__ == '__main__':
 
 	y_space_rand = np.zeros(len(X_space))
 	"*** YOUR CODE HERE ***"
+
+	y_space_rand = m_opt * X_space + b_opt + noise.reshape(-1,1)
 
 	"*** END YOUR CODE HERE ***"
 
@@ -136,7 +140,8 @@ if __name__ == '__main__':
 	X_space_stacked = X_space	# need to be replaced following hint 1 and 2
 	W_opt = None
 	"*** YOUR CODE HERE ***"
-
+	X_space_stacked = np.hstack((np.ones_like(y_space), X_space))
+	W_opt = np.linalg.solve(X_space_stacked.T @ X_space_stacked, X_space_stacked.T @ y_space_rand)
 
 	"*** END YOUR CODE HERE ***"
 
@@ -154,6 +159,8 @@ if __name__ == '__main__':
 	y_pred_rand = []
 	"*** YOUR CODE HERE ***"
 
+	y_pred_rand = np.array([b_rand_opt + m_rand_opt * x for x in X_space])
+	y_pred_rand.reshape(-1, 1)
 
 	"*** END YOUR CODE HERE ***"
 
