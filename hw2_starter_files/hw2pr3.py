@@ -185,7 +185,7 @@ def norm_vs_lambda(X_train, y_train, X_val, y_val):
 
 	reg_list = np.random.uniform(0, 150, 150)
 	reg_list.sort()
-	W_list = [linreg(X_train, y_train, reg = lb) for lb in reg_list]
+	W_list = [linreg(X_train, y_train, reg = lb) for lb in reg_list] #samw as above
 
 
 	norm_list = [np.linalg.norm(W, 2) for W in W_list] #Finds the norm for each one
